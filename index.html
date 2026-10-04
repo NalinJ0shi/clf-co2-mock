@@ -24,9 +24,14 @@
       <div id="quiz-container" class="space-y-6"></div>
 
       <div class="mt-8 flex flex-col sm:flex-row justify-between items-center bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl gap-4">
-        <button id="submit-btn" class="w-full sm:w-auto bg-orange-600 hover:bg-orange-500 text-white font-bold px-8 py-3.5 rounded-xl transition duration-200 shadow-lg shadow-orange-600/20 cursor-pointer">
-          Submit Current Set & Score
-        </button>
+        <div class="flex flex-col sm:flex-row w-full sm:w-auto gap-3">
+          <button id="shuffle-btn" type="button" class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-white font-bold px-6 py-3.5 rounded-xl border border-slate-700 transition duration-200 shadow-lg shadow-slate-900/20 cursor-pointer">
+            Shuffle Questions
+          </button>
+          <button id="submit-btn" class="w-full sm:w-auto bg-orange-600 hover:bg-orange-500 text-white font-bold px-8 py-3.5 rounded-xl transition duration-200 shadow-lg shadow-orange-600/20 cursor-pointer">
+            Submit Current Set & Score
+          </button>
+        </div>
         <div id="score-display" class="hidden text-xl font-bold text-orange-400 text-center sm:text-right"></div>
       </div>
     </div>
