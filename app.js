@@ -5,6 +5,7 @@
 
 const quizContainer = document.getElementById('quiz-container');
 const tabContainer = document.getElementById('tab-container');
+const shuffleButton = document.getElementById('shuffle-btn');
 const submitButton = document.getElementById('submit-btn');
 const scoreDisplay = document.getElementById('score-display');
 const timerEl = document.getElementById('timer');
@@ -51,6 +52,17 @@ function renderTabs() {
   });
 }
 
+function shuffleQuestions(items) {
+  const shuffled = [...items];
+
+  for (let currentIndex = shuffled.length - 1; currentIndex > 0; currentIndex -= 1) {
+    const randomIndex = Math.floor(Math.random() * (currentIndex + 1));
+    [shuffled[currentIndex], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[currentIndex]];
+  }
+
+  return shuffled;
+}
+
 function renderExam() {
   const currentSet = state.sets[state.activeSetIndex];
   if (!currentSet) {
@@ -92,6 +104,17 @@ function renderExam() {
   });
 }
 
+function shuffleCurrentSet() {
+  const currentSet = state.sets[state.activeSetIndex];
+  if (!currentSet || !Array.isArray(currentSet.questions) || currentSet.questions.length < 2) {
+    return;
+  }
+
+  currentSet.questions = shuffleQuestions(currentSet.questions);
+  scoreDisplay.classList.add('hidden');
+  renderExam();
+}
+
 function calculateScore() {
   const currentSet = state.sets[state.activeSetIndex];
   const questions = currentSet ? currentSet.questions : [];
@@ -131,6 +154,8 @@ function calculateScore() {
 
   return { score, total: questions.length };
 }
+
+shuffleButton.addEventListener('click', shuffleCurrentSet);
 
 submitButton.addEventListener('click', () => {
   const { score, total } = calculateScore();
